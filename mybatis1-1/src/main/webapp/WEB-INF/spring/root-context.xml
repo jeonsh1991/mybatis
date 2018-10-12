@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<!-- dataSource로 마이바티스설정의 경우 
+	첫번째. pom.xml에 mybatis 디펜던시4가지와 가장 최근의 mysql커넥터 디펜던시가 있어야한다.
+	그래야 com.mysql.cj.jdbc.Driver와 스키마?서버타임존=UTC사용이 가능하다.
+	 -->
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!--DataSource 설정-->
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://127.0.0.1:3306/spring?serverTimezone=UTC"/>
+    <property name="username" value="root"/>
+    <property name="password" value="tmdgml65"/>
+</bean>
+
+<!--SqlSessionFactory 설정 : dataSource를 참조, mybatis-config.xml 경로설정-->
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="configLocation" value="classpath:/mybatis-config.xml"/>
+</bean>
+
+
+		
+</beans>
